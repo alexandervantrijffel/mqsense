@@ -3,10 +3,8 @@ import sys
 from pathlib import Path
 from textwrap import dedent
 
-import nox
 
 try:
-    from nox_poetry import Session
     from nox_poetry import session
 except ImportError:
     message = f"""\
@@ -17,6 +15,8 @@ except ImportError:
     {sys.executable} -m pip install nox-poetry"""
     raise SystemExit(dedent(message)) from None
 
+import nox
+from nox.sessions import Session
 
 package = "mqsense"
 python_versions = ["3.9"]
@@ -98,3 +98,30 @@ def typeguard(session: Session) -> None:
     session.install(".")
     session.install("pytest", "typeguard", "pygments")
     session.run("pytest", f"--typeguard-packages={package}", *session.posargs)
+
+
+owner, repository = "alexandervantrijffel", "mqsense"
+labels = "mqsense"
+bump_paths = "README.rst"
+
+
+@nox.session(name="prepare-release")
+def prepare_release(session: Session) -> None:
+    """Prepare a GitHub release."""
+    args = [
+        f"--owner={owner}",
+        f"--repository={repository}",
+        *[f"--bump={path}" for path in bump_paths],
+        *[f"--label={label}" for label in labels],
+        *session.posargs,
+    ]
+    session.install("click", "github3.py")
+    session.run("python", "tools/prepare-github-release.py", *args, external=True)
+
+
+@nox.session(name="publish-release")
+def publish_release(session: Session) -> None:
+    """Publish a GitHub release."""
+    args = [f"--owner={owner}", f"--repository={repository}", *session.posargs]
+    session.install("click", "github3.py")
+    session.run("python", "tools/publish-github-release.py", *args, external=True)
