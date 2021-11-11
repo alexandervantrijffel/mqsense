@@ -35,7 +35,7 @@ def get_connection_details(host: str, user: str, password: str) -> ConnectionDet
         host,
         user,
         password,
-        clientId=f"mqsense-{random.randrange(10000,999999,1)}",
+        clientId=f"mqsense-{random.randrange(10000,999999,1)}",  # noqa: S311
     )
 
 
