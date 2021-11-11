@@ -10,6 +10,20 @@ mqsense
    :target: https://github.com/psf/black
    :alt: Black
 
+Usage
+-------
+
+Step 1: run the Mosquitto server::
+  
+  docker-compose up -d
+
+Step 2: subscribe to all topics::
+
+  make run_subscribe
+
+Step 3: publish a message to the Mosquitto server::
+
+  make run_publish
 
 License
 -------

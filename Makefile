@@ -6,9 +6,18 @@ help: ## Shows help screen.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@echo ""
 
-.PHONY: run
-run: ## Runs the project
-	poetry run mqsense status
+HOSTNAME ?= localhost
+USER_NAME ?= mqsense
+PASSWORD ?= i_am_a_smart_thing
+
+.PHONY: run_subscribe
+run_subscribe: ## ect
+	poetry run mqsense subscribe --host-name $(HOSTNAME) --user-name $(USER_NAME) --password $(PASSWORD)
+
+.PHONY: run_publish
+run_publish: ## Runs the project
+	poetry run mqsense publish --host-name $(HOSTNAME) --user-name $(USER_NAME) --password $(PASSWORD)
+
 
 .PHONY: test
 test: ## Runs all unit tests of the project.
