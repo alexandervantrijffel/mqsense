@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 RUN groupadd --gid 1000 -r python && useradd --uid 1000 -r -g python python
 RUN pip install virtualenv poetry
