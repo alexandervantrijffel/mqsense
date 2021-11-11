@@ -105,7 +105,7 @@ labels = "mqsense"
 bump_paths = "README.rst"
 
 
-@nox.session(name="prepare-release")
+# @nox.session(name="prepare-release")
 def prepare_release(session: Session) -> None:
     """Prepare a GitHub release."""
     args = [
