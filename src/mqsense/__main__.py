@@ -36,8 +36,8 @@ if __name__ == "__main__":
     main()
 
 
-# Sample typer subcommand 'hello'
-# @app.command()
-# def hello() -> None:
-#     """sample command hello"""
-#     logging.info("Hello")
+Sample typer subcommand 'hello'
+@app.command()
+def hello() -> None:
+    """sample command hello"""
+    logging.info("Hello")
