@@ -72,3 +72,7 @@ docs/_build
 
 # PyEnv
 .python-version
+
+mosquitto/data-mosquitto/data/
+mosquitto/data-mosquitto/log/
+mosquitto/data-mosquitto/passwords

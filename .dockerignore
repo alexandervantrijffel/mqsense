@@ -83,3 +83,5 @@ docs/_build
 .pre-commit-config.yaml
 Dockerfile
 python-ci.Dockerfile
+
+mosquitto/
