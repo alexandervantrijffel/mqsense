@@ -1,0 +1,15 @@
+[flake8]
+select = ANN,B,B9,BLK,C,DAR,E,F,I,S,W
+ignore = E203,E501,W503,ANN101,ANN102,ANN204,I201
+max-line-length = 100
+max-complexity = 10
+application-import-names = mqsense,tests
+exclude =
+    .git,
+    .venv,
+    __pycache__,
+    .pytest_cache,
+    .nox
+import-order-style = smarkets
+docstring-convention = google
+per-file-ignores = tests/*:S101

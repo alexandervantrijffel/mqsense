@@ -1,0 +1,10 @@
+{
+  "_template": "/data/dev/gitlab.com/schubergphilis/cookiecutter-hypermodern-python",
+  "author": "Alexander van Trijffel",
+  "email": "994409+alexandervantrijffel@users.noreply.github.com",
+  "friendly_name": "mqsense",
+  "license": "MIT",
+  "package_name": "mqsense",
+  "project_name": "mqsense",
+  "version": "0.1.0"
+}
