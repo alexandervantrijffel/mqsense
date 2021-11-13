@@ -1,4 +1,5 @@
 """Command-line interface."""
+import click
 import datetime
 import json
 import logging
@@ -69,20 +70,26 @@ def subscribe(
     host: str = host_option, user_name: str = username_option, password: str = password_option
 ) -> None:
     """subscribes to all topics on the broker"""
-    MQTTClient().subscribe(get_connection_details(host, user_name, password), "#")
+    try:
+        MQTTClient().subscribe(get_connection_details(host, user_name, password), "#")
+    except Exception as e:
+        raise click.ClickException(str(e))
 
 
 @app.command()
 def publish(
     host: str = host_option, user_name: str = username_option, password: str = password_option
 ) -> None:
-    MQTTClient().publish(
-        get_connection_details(host, user_name, password),
-        topic="mqsense/test",
-        message=json.dumps(
-            {"title": "this is just a test", "time": str(datetime.datetime.now().isoformat())},
-        ),
-    )
+    try:
+        MQTTClient().publish(
+            get_connection_details(host, user_name, password),
+            topic="mqsense/test",
+            message=json.dumps(
+                {"title": "this is just a test", "time": str(datetime.datetime.now().isoformat())},
+            ),
+        )
+    except Exception as e:
+        raise click.ClickException(str(e))
 
 
 def main() -> None:

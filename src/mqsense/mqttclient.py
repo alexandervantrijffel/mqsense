@@ -53,6 +53,7 @@ class MQTTClient(LogMixin):
             self.log.debug("Got keyboard interrupt. Stopping the Paho loop.")
         except Exception as e:
             self.log.error("Unknown error in subscription", exception=str(e))
+            raise
         self.client.disconnect()
 
     def on_connect(self, client, userdata: dict, flags, rc) -> None:  # noqa: ANN001
@@ -72,6 +73,7 @@ class MQTTClient(LogMixin):
             handle.wait_for_publish()
         except Exception as e:
             self.log.error("Unknown error in publish", exception=str(e))
+            raise
 
     def on_message(self, client, userdata: dict, message) -> None:  # noqa: ANN001
         self.log.info(
