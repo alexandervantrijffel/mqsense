@@ -1,8 +1,9 @@
 """Test cases for the __main__ module."""
 import pytest
+import unittest
 from typer.testing import CliRunner
 
-from mqsense.__main__ import app
+from mqsense.__main__ import app, get_connection_details
 
 
 @pytest.fixture
@@ -11,7 +12,18 @@ def runner() -> CliRunner:
     return CliRunner()
 
 
-def test_main_succeeds(runner: CliRunner) -> None:
+@pytest.fixture
+def test_case() -> unittest.TestCase:
+    return unittest.TestCase()
+
+
+def test_main_succeeds(runner: CliRunner, test_case: unittest.TestCase) -> None:
     """It exits with a status code of zero."""
     result = runner.invoke(app, ["--version"])
-    assert result.exit_code == 0
+    test_case.assertEqual(result.exit_code, 0)
+
+
+def test_get_random_clientid(test_case: unittest.TestCase) -> None:
+    det1 = get_connection_details("host", "user", "password")
+    det2 = get_connection_details("host", "user", "password")
+    test_case.assertNotEqual(det1.clientId, det2.clientId)
