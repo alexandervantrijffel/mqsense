@@ -15,7 +15,7 @@ structlog = "^21.2.0"
 
 [tool.poetry.dev-dependencies]
 # Dependencies for running tests
-coverage = {version = "^6.1", extras = ["toml"]}
+coverage = {version = "^6.3", extras = ["toml"]}
 pytest = "^6.2"
 pytest-cov = "^3.0"
 pytest-mock = "^3.6"
